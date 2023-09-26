@@ -1,0 +1,17 @@
+<mvc:View
+    controllerName="flexiblecolumnlayout.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    height="100%"
+>
+    <App id="app">
+        <f:FlexibleColumnLayout
+            id="fcl"
+            layout="{appView>/layout}"
+            backgroundDesign="Translucent"
+        />
+    </App>
+</mvc:View>

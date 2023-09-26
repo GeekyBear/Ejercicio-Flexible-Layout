@@ -1,0 +1,84 @@
+<mvc:View
+    displayBlock="true"
+    controllerName="flexiblecolumnlayout.controller.Detail"
+    height="100%"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+>
+    <f:DynamicPage
+        id="dynamicPageId"
+        toggleHeaderOnTitleClick="false"
+    >
+        <f:content>
+            <ObjectPageLayout
+                id="ObjectPageLayout"
+                showTitleInHeaderContent="true"
+                alwaysShowContentHeader="false"
+                preserveHeaderStateOnScroll="false"
+                headerContentPinnable="true"
+                isChildPage="true"
+                upperCaseAnchorBar="false"
+            >
+                <headerTitle>
+                    <ObjectPageDynamicHeaderTitle>
+                        <expandedHeading>
+                            <m:Title
+                                text="{selectedItem>/ProductName}"
+                                wrapping="true"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </expandedHeading>
+                    </ObjectPageDynamicHeaderTitle>
+                </headerTitle>
+                <sections>
+                    <ObjectPageSection title="{i18n>GeneralInformation}">
+                        <subSections>
+                            <ObjectPageSubSection>                        
+                                <blocks>
+                                	<m:Button type="Back" press="handleClose" />
+                                    <form:SimpleForm
+                                        maxContainerCols="2"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanL="12"
+                                        labelSpanM="12"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        columnsL="1"
+                                        columnsM="1"
+                                    >
+                                        <form:content>
+                                            <m:Label text="{i18n>ProductID}" />
+                                            <m:Text
+                                                text="{selectedItem>/ProductID}"
+                                            />
+                                            <m:Label text="{i18n>QuantityPerUnit}" />
+                                            <m:Text
+                                                text="{selectedItem>/QuantityPerUnit}"
+                                            />
+                                            <m:Label text="{i18n>UnitPrice}" />
+                                            <m:Text
+                                                text="{selectedItem>/UnitPrice}"
+                                            />
+                                             <m:Label text="{i18n>UnitsInStock}" />
+                                            <m:Text
+                                                text="{selectedItem>/UnitsInStock}"
+                                            />
+                                            <m:Label text="{i18n>SupplierID}" />
+                                            <m:Text
+                                                text="{selectedItem>/SupplierID}"
+                                            />
+                                        </form:content>
+                                    </form:SimpleForm>
+                                </blocks>
+                            </ObjectPageSubSection>
+                        </subSections>
+                    </ObjectPageSection>
+                </sections>
+            </ObjectPageLayout>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

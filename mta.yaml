@@ -1,0 +1,57 @@
+_schema-version: "3.2"
+ID: EjercicioFlexibleLayout
+version: 0.0.1
+modules:
+- name: EjercicioFlexibleLayout-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: EjercicioFlexibleLayout-destination-service
+    parameters:
+      content-target: true
+  - name: EjercicioFlexibleLayout_html_repo_host
+    parameters:
+      service-key:
+        name: EjercicioFlexibleLayout_html_repo_host-key
+  - name: uaa_EjercicioFlexibleLayout
+    parameters:
+      service-key:
+        name: uaa_EjercicioFlexibleLayout-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: Flexible_Router_EjercicioFlexibleLayout_html_repo_host
+          ServiceInstanceName: EjercicioFlexibleLayout-html5-app-host-service
+          ServiceKeyName: EjercicioFlexibleLayout_html_repo_host-key
+          sap.cloud.service: Flexible_Router
+        - Authentication: OAuth2UserTokenExchange
+          Name: Flexible_Router_uaa_EjercicioFlexibleLayout
+          ServiceInstanceName: EjercicioFlexibleLayout-xsuaa-service
+          ServiceKeyName: uaa_EjercicioFlexibleLayout-key
+          sap.cloud.service: Flexible_Router
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+resources:
+- name: EjercicioFlexibleLayout-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+    service: destination
+    service-name: EjercicioFlexibleLayout-destination-service
+    service-plan: lite
+- name: EjercicioFlexibleLayout_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: EjercicioFlexibleLayout-html5-app-host-service
+    service-plan: app-host
+- name: uaa_EjercicioFlexibleLayout
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: EjercicioFlexibleLayout-xsuaa-service
+    service-plan: application

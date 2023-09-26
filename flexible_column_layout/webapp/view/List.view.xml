@@ -1,0 +1,94 @@
+<mvc:View
+    controllerName="flexiblecolumnlayout.controller.List"
+    height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <f:DynamicPage
+        id="dynamicPageId"
+        toggleHeaderOnTitleClick="false"
+    >
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>Products}" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <!-- DynamicPage Content -->
+        <f:content>
+            <Table
+                id="productsTable"
+                mode="SingleSelectMaster"
+                itemPress="onListItemPress"
+                inset="false"
+                items="{
+					path: 'products>/',
+					sorter: {
+						path: 'ProductName'
+					}
+				}"
+                class="sapFDynamicPageAlignContent"
+                width="auto"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <SearchField
+                            id="searchField"
+							value="{filters>/query}"
+                            width="50%"
+                            placeholder="{i18n>SearchFor}"
+                            search=".onSearch"
+                        />
+                        <OverflowToolbarButton
+                            icon="sap-icon://sort"
+                            type="Transparent"
+                            press="onSort"
+                        />
+						<Button id="langButton" press="setLang" icon="{langModel>/icon}"></Button>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="12em">
+                        <Text text="{i18n>ProductName}" />
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="{i18n>UnitPrice}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation">
+                        <cells>
+                            <ObjectIdentifier
+                                title="{products>ProductName}"
+                                text="{products>ProductId}"
+                            />
+                            <Text
+                                text="{path: 'products>UnitPrice', formatter: '.Formatter.formatPrice'}"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    type="Accept"
+                    text="{i18n>Accept}"
+                />
+                <Button
+                    type="Reject"
+                    text="{i18n>Reject}"
+                />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
